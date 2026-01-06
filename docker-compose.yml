@@ -1,0 +1,19 @@
+services:
+  headscale-vpn:
+    image: tuhinsu/headscail:latest
+    container_name: headscale-vpn
+    restart: unless-stopped
+
+    cap_add:
+      - NET_ADMIN
+
+    devices:
+      - /dev/net/tun:/dev/net/tun
+
+    ports:
+      - "8080:8080"
+
+    volumes:
+      - ~/headscale-docker/config:/etc/headscale
+      - ~/headscale-docker/data:/var/lib/headscale
+      - ~/headscale-docker/openvpn:/etc/openvpn
